@@ -1,0 +1,936 @@
+/*
+  ==================================================
+  		mailchimp casl css script
+  		Copyright 2014 Draekko, All rights reserved.
+  		Licensed GPLv3.
+  ==================================================
+ */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+  		 url('fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+  		 url('fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+  		 url('fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: 'FontAwesome';
+	src: local('FontAwesome');
+}
+
+label {
+	display: inline-block;
+	font-weight: bold;
+}
+
+.mc_casl_newsletter {
+	float: left;
+	width: 100%;
+	margin: 0px;
+	background-color: #161616;
+	border-top: 1px solid #5a5a5a;
+	/* border-bottom: 1px solid #5a5a5a; */
+	padding-left: 22px;
+	padding-right: 22px;
+	display: inline-block;
+	padding: 45px 0px 60px 0px;
+	text-align: center;
+}
+
+.mc_casl_newsletter form {
+	position: relative;
+	width: 520px;
+	display: inline-block;
+}
+
+.mc_casl_newsletter form label {
+	font-family: 'Roboto', sans-serif;
+	float: left;
+	width: 100%;
+	text-align: left;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 13px;
+}
+
+.mc_casl_newsletter h4 {
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	font-weight: 500;
+	margin: 0px 0px 17px 0px;
+	font-size: 18px;
+	color: white !important;
+}
+
+ .mc_casl_container {
+	padding: 0px 13px;
+	max-width: 970px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.mc_casl_container:before,
+.mc_casl_container:after {
+	display: table;
+	content: " ";
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+form#mcform label {
+	color: #DDD;
+}
+
+.mc_casl_newsletter form em {
+	color: #999;
+	float: left;
+	margin-right: 10px;
+}
+
+.fa-envelope-o:before {
+	content: "\f003";
+}
+
+.fa {
+	display: inline-block;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.with_name_fix {
+	top: 126px;
+}
+
+input[type=text]#mc_casl_last_name.mailchimp_casl_newsletter_lname,
+input[type=text]#mc_casl_first_name.mailchimp_casl_newsletter_fname {
+	width: 99%;
+	border-radius: 3px;
+}
+
+
+input[type=button].mailchimp_casl_checkout_submit,
+input[type=submit].mailchimp_casl_newsletter_submit {
+	cursor: pointer;
+	-webkit-appearance: button;
+	padding: 10px 22px;
+	right: 4px;
+	text-transform: uppercase;
+	line-height: 22px;
+	background-color: #232323;
+	position: absolute;
+	z-index: 2;
+	float: left;
+	width: 20%;
+	min-width: 100px;
+	font-size: 19px;
+	font-weight: 300;
+	border: 1px solid;
+	height: 50px;
+	border-color: #999;
+	color: #DDD;
+	top: 0;
+	font-weight: 400;
+	margin-left: 0;
+	border-radius: 0;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-color: #999 !important;
+	color: #ddd !important;
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+input[type=button].mailchimp_casl_checkout_button,
+input[type=button].mailchimp_casl_newsletter_button {
+	cursor: pointer;
+	-webkit-appearance: button;
+	padding: 10px 22px;
+	right: 4px;
+	text-transform: uppercase;
+	line-height: 22px;
+	background-color: #232323;
+	position: relative;
+	z-index: 2;
+	float: right;
+	width: 20%;
+	min-width: 100px;
+	font-size: 19px;
+	font-weight: 300;
+	border: 1px solid;
+	height: 50px;
+	border-color: #999;
+	color: #DDD;
+	top: 0;
+	font-weight: 400;
+	margin-left: 0;
+	border-radius: 0;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-color: #999 !important;
+	color: #ddd !important;
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+input[type=submit]:hover.mailchimp_casl_newsletter_submit,
+input[type=button]:hover.mailchimp_casl_newsletter_button {
+	color: #cfbd25 !important;
+}
+
+input[type=button]:hover.mailchimp_casl_checkout_submit,
+input[type=button]:hover.mailchimp_casl_checkout_button {
+	color: #cfbd25 !important;
+}
+
+.mc_casl_newsletter form input[type="text"] {
+	margin-bottom: 13px;
+	color: #F1F1F1;
+	background-color: #000;
+	border-color: #888 !important;
+	border: 1px solid;
+	height: 50px;
+	font-weight: 300;
+	float: left;
+	line-height: normal;
+	vertical-align: middle;
+	width: 80%;
+	padding: 0;
+	padding-left: 20px;
+	padding-right: 30px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 19px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+input#mc_casl_email {
+	line-height: normal;
+	vertical-align: middle;
+	width: 80%;
+	padding: 0;
+	padding-left: 20px;
+	padding-right: 30px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 19px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.mc_casl_spinner_agreement,
+.mc_casl_agreement_checkout,
+.mc_casl_agreement {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(41,41,41,0.9);
+	z-index: 6000;
+}
+
+.mc_casl_spinner_box {
+	position: fixed;
+	background-color: transparent;
+	border: 0;
+	color: #ddd;
+	padding: 8px;
+	margin: 0;
+	top: 50%;
+	left: 50%;
+	margin-left: -30px;
+	margin-top: -30px;
+	width: 60px;
+	min-height: 60px;
+    z-index: 99999;
+}
+
+.mc_casl_spinner {
+    z-index: 999999;
+    height:60px;
+    width:60px;
+    margin:0px auto;
+    position:relative;
+    -webkit-animation: rotation .8s infinite linear;
+    -moz-animation: rotation .8s infinite linear;
+    -o-animation: rotation .8s infinite linear;
+    animation: rotation .8s infinite linear;
+    border-left:6px solid rgba(239,239,239,.4);
+    border-right:6px solid rgba(239,239,239,.4);
+    border-bottom:6px solid rgba(239,239,239,.4);
+    border-top:6px solid rgba(239,239,239,.8);
+    border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(359deg);}
+}
+    
+@-moz-keyframes rotation {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(359deg);}
+}
+    
+@-o-keyframes rotation {
+    from {-o-transform: rotate(0deg);}
+    to {-o-transform: rotate(359deg);}
+}
+    
+@keyframes rotation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(359deg);}
+}
+
+#mc_casl_cancel_checkout_thankyou_button,
+#mc_casl_cancel_checkout_error_button {
+    margin: 55px 150px 0 0;
+}
+
+.mc_casl_agreement_box_checkout,
+.mc_casl_thankyou_box_checkout,
+.mc_casl_error_box_checkout,
+.mc_casl_error_box,
+.mc_casl_agreement_box {
+	position: fixed;
+	background-color: #171717;
+	border: 1px solid #888;
+	color: #ddd;
+	padding: 8px;
+	margin: 0;
+	top: 50%;
+	left: 50%;
+	margin-left: -225px;
+	margin-top: -150px;
+	width: 440px;
+	min-height: 300px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0px 0px 0px 18px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:    0px 0px 0px 18px rgba(0, 0, 0, 0.25);
+	box-shadow:         0px 0px 0px 18px rgba(0, 0, 0, 0.25);
+}
+
+.mc_casl_thankyou_box_checkout,
+.mc_casl_error_box_checkout,
+.mc_casl_error_box {
+	display: none;
+	min-height: 150px;
+}
+
+.mc_casl_newsletter form label.mc_casl_agreement_text {
+	font-family: 'Roboto', sans-serif;
+	float: left;
+	width: 100%;
+	text-align: left;
+	font-size: 22px;
+	font-weight: 300;
+	line-height: 25px;
+}
+
+input[type="checkbox"].mc_casl_agreement_checkmark {
+	margin: 4px 0 0;
+	margin-top: 1px \9;
+	line-height: normal;
+	position: relative;
+	float: left;
+	margin: 8px 8px 0 8px;
+}
+
+input[type=button].mailchimp_casl_checkout_submit.agreement_fix,
+input[type=button].mailchimp_casl_checkout_button.agreement_fix {
+	float: right;
+	position: relative;
+	margin-top: 5px;
+	margin-left: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+input[type=submit].mailchimp_casl_newsletter_submit.agreement_fix,
+input[type=button].mailchimp_casl_newsletter_button.agreement_fix {
+	float: right;
+	position: relative;
+	margin-top: 5px;
+	margin-left: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.mc_casl_agreement_text_checkout,
+.mc_casl_agreement_thankyou_checkout,
+.mc_casl_agreement_error_checkout,
+.mc_casl_agreement_error,
+.mc_casl_agreement_text {
+	float: left;
+	margin-top: 10px;
+	word-wrap: break-word;
+}
+
+.mc_casl_agreement_text_checkout {
+    font-size: 18px;
+}
+
+.mc_casl_agreement_text:first-child {
+	margin-top: 0px;
+}
+
+#mc_casl_agreement_thankyou_msg_checkout,
+#mc_casl_agreement_error_msg_checkout,
+#mc_casl_agreement_error_msg,
+#mc_casl_agreement_email {
+	float: left;
+	word-wrap: break-word;
+	padding-bottom: 10px;
+}
+
+#mc_casl_agreement_thankyou_msg_checkout,
+#mc_casl_agreement_error_msg_checkout,
+#mc_casl_agreement_error_msg {
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+	clear: right;
+	margin-left: 6px;
+	line-height: 20px;
+	margin-top: -6px;
+}
+
+.mc_casl_client_info_checkout,
+.mc_casl_client_info {
+	margin: 20px 0 0 0;
+	float: left;
+	font-size: 12px;
+	font-weight: 300;
+	overflow: hidden;
+	width: 100%;
+	height: 14px;
+	line-height: 16px;
+}
+
+label.mc_casl_client_info_checkout,
+label.mc_casl_client_info {
+	width: 47%;
+	height: 40px;
+	position: absolute;
+	bottom: 12px;
+	left: 10px;
+	line-height: 16px;
+	word-wrap: break-word;
+}
+
+label.mc_casl_client_info_checkout.lineheight_fix,
+label.mc_casl_client_info.lineheight_fix {
+	width: 47%;
+	line-height: 18px;
+}
+
+fieldset label.birthday {
+	font-family: 'DroidSans', sans-serif;
+	font-size: 18px;
+	font-weight: 300;
+	color: #fff;
+	float: left;
+	width: 110px;
+	line-height: 50px;
+	text-align: center;
+}
+
+form .form-row-casl select.year_select {
+	width: 100px;
+	margin-left: 25px;
+	text-align: center;
+	padding: 13px 6px;
+	line-height: normal;
+}
+
+form .form-row-casl select.month_select {
+	width: 130px;
+	margin-left: 25px;
+	text-align: center;
+	padding: 13px 6px;
+	line-height: normal;
+}
+
+form .form-row-casl select.day_select {
+	width: 100px;
+	margin-left: 25px;
+	text-align: center;
+	padding: 13px 6px;
+	line-height: normal;
+}
+
+form .form-row-casl select {
+	font-family: 'DroidSans', sans-serif;
+	background-color: #181818;
+	font-size: 16px;
+	font-weight: 300;
+	color: #fff;
+	float: left;
+	border-color: #888 !important;
+	border: 1px solid;
+	height: 36px;
+	min-height: 30px;
+	padding: 6px 6px;
+	width: 20%;
+	margin-left:  5%;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	line-height: normal;
+	height: 50px;
+	margin-bottom: 13px;
+	text-align: center;
+}
+
+/* #mc_casl_cancel_button {
+    margin: 55px 160px 5px 0;
+} */
+
+@media only screen and (min-width: 1200px) and (max-width: 8000px) {
+	.mc_casl_container {
+		padding: 0 13px;
+		max-width: 970px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+    #mc_casl_cancel_checkout_thankyou_button,
+    #mc_casl_cancel_checkout_error_button {
+        margin: 55px 150px 0 0;
+    }
+}
+
+@media only screen and (min-width: 990px) and (max-width: 1199px) {
+	.mc_casl_container {
+		padding: 0 13px;
+		max-width: 970px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+    #mc_casl_cancel_checkout_thankyou_button,
+    #mc_casl_cancel_checkout_error_button {
+        margin: 55px 150px 0 0;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+	.mc_casl_container {
+		padding: 0 13px;
+		max-width: 970px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+    #mc_casl_cancel_checkout_thankyou_button,
+    #mc_casl_cancel_checkout_error_button {
+        margin: 55px 150px 0 0;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+
+	.mc_casl_newsletter form label {
+		font-family: 'Roboto', sans-serif;
+		float: left;
+		width: 87%;
+		text-align: left;
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 13px;
+		padding: 8px;
+	}
+
+	input[type=text]#mc_casl_last_name.mailchimp_casl_newsletter_lname,
+	input[type=text]#mc_casl_first_name.mailchimp_casl_newsletter_fname {
+		width: 100%;
+		border-radius: 3px;
+		margin: 1% 0;
+	}
+
+	fieldset label.birthday {
+		font-family: 'DroidSans', sans-serif;
+		font-size: 18px;
+		font-weight: 300;
+		color: #fff;
+		float: left;
+		width: 100%;
+		line-height: 50px;
+		text-align: left;
+		margin: 0 3%;
+	}
+
+	form .form-row-casl select.month_select {
+		margin: 1% 0;
+		text-align: center;
+		padding: 13px 6px;
+		width: 100%;
+		line-height: normal;
+	}
+
+	form .form-row-casl select.day_select {
+		margin: 1% 0;
+		text-align: center;
+		padding: 13px 6px;
+		width: 100%;
+		line-height: normal;
+	}
+
+	form .form-row-casl select.year_select {
+		margin: 1% 0;
+		text-align: center;
+		padding: 13px 6px;
+		width: 100%;
+		line-height: normal;
+	}
+
+	.mc_casl_container {
+		padding: 0 13px;
+		max-width: 768px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	input#mc_casl_email {
+		line-height: normal;
+		vertical-align: middle;
+		width: 100%;
+		padding: 0;
+		padding-left: 10px;
+		padding-right: 30px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 19px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		margin: 1% 0;
+	}
+
+	input[type=button].mailchimp_casl_newsletter_button {
+		cursor: pointer;
+		-webkit-appearance: button;
+		text-transform: uppercase;
+		line-height: 22px;
+		background-color: #232323;
+		position: relative;
+		z-index: 2000;
+		float: left;
+		top: 6px;
+		left: 0;
+		width: 100%;
+		font-size: 19px;
+		font-weight: 300;
+		border: 1px solid;
+		height: 50px;
+		border-color: #999;
+		color: #DDD;
+		font-weight: 400;
+		border-color: #999 !important;
+		color: #ddd !important;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+
+	.mc_casl_bottom_message {
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+
+	form#mcform label.mc_casl_bottom_message {
+		width: 100%;
+	}
+
+    .mc_casl_newsletter form {
+    	position: relative;
+    	width: 420px;
+    	display: inline-block;
+    }
+
+	.mc_casl_newsletter form em {
+		color: #999;
+		float: left;
+		margin-right: 10px;
+		margin-top: 4px;
+		height: 50px;
+	}
+
+	label.mc_casl_client_info_checkout,
+	label.mc_casl_client_info {
+		position: absolute;
+		bottom: 72px;
+		left: 0px;
+	}
+
+	.mc_casl_newsletter form label.mc_casl_agreement_text {
+		font-family: 'Roboto', sans-serif;
+		float: left;
+		width: 100%;
+		text-align: left;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 20px;
+		padding: 0;
+	}
+
+	input[type=submit].mailchimp_casl_newsletter_submit.agreement_fix,
+	input[type=button].mailchimp_casl_newsletter_button.agreement_fix {
+		width: 48%;
+		font-size: 16px;
+		margin-top: 55px;
+		margin-left: 6px;
+		margin-right: 2px;
+	}
+
+	input[type=button]#mc_casl_cancel_error_button.mailchimp_casl_newsletter_button.agreement_fix,
+	input[type=button]#mc_casl_cancel_button.mailchimp_casl_newsletter_button.agreement_fix {
+		width: 28%;
+		font-size: 16px;
+		margin-top: 55px;
+		margin-left: auto;
+		margin-right: 150px;
+		margin-bottom: 10px;
+	}
+
+    #mc_casl_agreement_thankyou_msg_checkout,
+    #mc_casl_agreement_error_msg_checkout,
+	#mc_casl_agreement_error_msg {
+		font-size: 16px;
+		line-height: 18px;
+	}
+
+    #mc_casl_cancel_checkout_thankyou_button,
+    #mc_casl_cancel_checkout_error_button {
+        margin: 55px 150px 0 0;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+
+	.mc_casl_newsletter form label {
+		font-family: 'Roboto', sans-serif;
+		float: left;
+		width: 58%;
+		text-align: left;
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 13px;
+		padding: 8px;
+	}
+
+	input[type=text]#mc_casl_last_name.mailchimp_casl_newsletter_lname,
+	input[type=text]#mc_casl_first_name.mailchimp_casl_newsletter_fname {
+		width: 100%;
+		border-radius: 3px;
+		margin: 1% 0;
+	}
+
+	fieldset label.birthday {
+		font-family: 'DroidSans', sans-serif;
+		font-size: 18px;
+		font-weight: 300;
+		color: #fff;
+		float: left;
+		width: 100%;
+		line-height: 50px;
+		text-align: left;
+		margin: 0 3%;
+	}
+
+	form .form-row-casl select.month_select {
+		margin: 1% 0;
+		text-align: center;
+		padding: 13px 6px;
+		width: 100%;
+		line-height: normal;
+	}
+
+	form .form-row-casl select.day_select {
+		margin: 1% 0;
+		text-align: center;
+		padding: 13px 6px;
+		width: 100%;
+		line-height: normal;
+	}
+
+	form .form-row-casl select.year_select {
+		margin: 1% 0;
+		text-align: center;
+		padding: 13px 6px;
+		width: 100%;
+		line-height: normal;
+	}
+
+	.mc_casl_container {
+		padding: 0;
+		max-width: 480px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	input#mc_casl_email {
+		line-height: normal;
+		vertical-align: middle;
+		width: 100%;
+		padding: 0;
+		padding-left: 10px;
+		padding-right: 30px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 19px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		margin: 1% 0;
+	}
+
+	input[type=button].mailchimp_casl_newsletter_button {
+		cursor: pointer;
+		-webkit-appearance: button;
+		text-transform: uppercase;
+		line-height: 22px;
+		background-color: #232323;
+		position: relative;
+		z-index: 2000;
+		float: left;
+		top: 6px;
+		left: 0;
+		width: 100%;
+		font-size: 19px;
+		font-weight: 300;
+		border: 1px solid;
+		height: 50px;
+		border-color: #999;
+		color: #DDD;
+		font-weight: 400;
+		border-color: #999 !important;
+		color: #ddd !important;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+
+	.mc_casl_bottom_message {
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+
+	form#mcform label.mc_casl_bottom_message {
+		width: 270px;
+	}
+
+    .mc_casl_newsletter form {
+    	position: relative;
+    	width: 290px;
+    	display: inline-block;
+    }
+
+	.mc_casl_newsletter form em {
+		color: #999;
+		float: left;
+		margin-right: 10px;
+		margin-top: 4px;
+		height: 50px;
+	}
+
+	input[type=button].mailchimp_casl_newsletter_button.agreement_fix {
+		position: absolute;
+		top: 170px;
+		left: 70px;
+		margin: 0;
+		width: 150px;
+	}
+
+	.mc_casl_thankyou_box_checkout,
+	.mc_casl_error_box_checkout,
+	.mc_casl_error_box {
+		width: 290px;
+		min-height: 290px;
+	}
+
+	.mc_casl_agreement_box {
+		width: 290px;
+		min-height: 380px;
+	}
+
+    #mc_casl_agreement_thankyou_msg_checkout,
+    #mc_casl_agreement_error_msg_checkout,
+	#mc_casl_agreement_error_msg {
+		width: 240px;
+		font-size: 16px;
+		line-height: 18px;
+	}
+
+	label.mc_casl_client_info_checkout.lineheight_fix,
+	label.mc_casl_client_info.lineheight_fix {
+		width: 100%;
+	}
+
+	label.mc_casl_client_info_checkout,
+	label.mc_casl_client_info {
+		position: absolute;
+		bottom: 72px;
+		left: 0px;
+	}
+
+	.mc_casl_newsletter form label.mc_casl_agreement_text {
+		font-family: 'Roboto', sans-serif;
+		float: left;
+		width: 100%;
+		text-align: left;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 20px;
+		padding: 0;
+	}
+
+	input[type=submit].mailchimp_casl_newsletter_submit.agreement_fix,
+	input[type=button].mailchimp_casl_newsletter_button.agreement_fix {
+		width: 48%;
+		font-size: 16px;
+		margin-top: 55px;
+		margin-left: 5px;c
+	}
+
+	input[type=button]#mc_casl_cancel_error_button.mailchimp_casl_newsletter_button.agreement_fix,
+	input[type=button]#mc_casl_cancel_button.mailchimp_casl_newsletter_button.agreement_fix {
+		width: 48%;
+		font-size: 16px;
+		margin-top: 55px;
+		margin-left: 5px;
+		float: left;
+	}
+
+    #mc_casl_cancel_checkout_thankyou_button,
+    #mc_casl_cancel_checkout_error_button {
+        margin: 175px 80px 0 0;
+    }
+}

@@ -1,0 +1,50 @@
+/* MailChimp CASL Styles */
+
+.td_box {
+    padding: 0;
+}
+
+.ul_profile_box {
+	display:block; 
+	border:1px solid rgba(41,41,41, 0.2);
+	padding: 3px 2px 3px 3px;
+	margin: 0;
+	max-width:540px;
+}
+
+.ul_profile {
+	display:block; 
+	background-color: rgba(41,41,41,0.1);
+    border: 1px solid rgba(34,34,34,0.2);
+	max-width:540px;
+	overflow: scroll;
+	overflow-x: hidden;
+    max-height: 78px;
+    min-height: 30px;
+    margin: 0;
+}
+
+.li_profile {
+	max-width:532px; 
+	line-height:normal;
+	padding: 4px;
+	padding-left: 10px; 
+	background-color: rgba(41,41,41,0.1);
+	margin: 0;
+}
+
+.odd_bg {
+	background-color: rgba(41,41,41,0.1);
+}
+
+.even_bg {
+	background-color: rgba(41,41,41,0.06);
+}
+
+ul li.li_profile {
+	border-bottom: 1px solid rgba(34,34,34, 0.1);
+}
+
+ul li.li_profile:last-child {
+	border-bottom: 1px solid transparent;
+}
