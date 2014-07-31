@@ -32,10 +32,9 @@ Canadian and international opt-in laws.
 - Optionally, display an opt-in checkbox on the checkout page (this is 
   required in some countries)
 - Control the label displayed next to the opt-in checkbox
-- Control whether or not the opt-in checkbox is checked or unchecked 
-  by default
 - Control the placement of the opt-in checkbox on the checkout page 
   (under billing info or order info)
+- Control to show theme integration.
 
 == Installation ==
 
