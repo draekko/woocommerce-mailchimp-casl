@@ -6,7 +6,7 @@ Tested up to: 3.9.1
 Stable tag: 1.0.0
 License: GPLv3
 
-MailChimp integration for WooCommerce with CASL support.
+MailChimp integration for WordPress, and WooCommerce, with CASL support.
 
 == Description ==
 
