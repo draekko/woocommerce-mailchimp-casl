@@ -16,7 +16,7 @@ WooCommerce with CASL compliance and theme integration.
 Automatically subscribe customers to a designated MailChimp list upon 
 order creation or order completion. This can be done quietly or based 
 on the user's consent with several opt-in settings that support 
-canadian and international opt-in laws.
+Canadian and international opt-in laws.
 
 ### Features ###
 
