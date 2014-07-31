@@ -13,10 +13,10 @@ MailChimp integration for WooCommerce with CASL support.
 WooCommerce MailChimp CASL provides MailChimp integration for 
 WooCommerce with CASL compliance and theme integration.
 
-Automatically subscribe customers to a designated MailChimp list and, 
-optionally, MailChimp interest groups upon order creation or order 
-completion. This can be done quietly or based on the user's consent 
-with several opt-in settings that support international opt-in laws.
+Automatically subscribe customers to a designated MailChimp list upon 
+order creation or order completion. This can be done quietly or based 
+on the user's consent with several opt-in settings that support 
+canadian and international opt-in laws.
 
 ### Features ###
 
