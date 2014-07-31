@@ -25,11 +25,6 @@ with several opt-in settings that support international opt-in laws.
 - Subscribe customers to MailChimp after order creation
 - Subscribe customers to MailChimp after order completion
 
-#### Works with MailChimp Interest Groups ####
-
-- Set one or more interest groups to add users to based on the selected 
-  MailChimp list.
-
 #### Opt-In Settings ####
 
 - MailChimp double opt-in support (control whether a double opt-in email 
