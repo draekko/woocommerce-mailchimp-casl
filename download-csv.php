@@ -1,14 +1,25 @@
 <?php
-    include_once("../../../wp-load.php");
 
-    $uld = wp_upload_dir();
-    $temppath = $uld['basedir'] . "/mailchimp_casl/temp";
-    if ( !is_dir( $temppath ) ) {
-        echo "ERROR PATH NOT FOUND";
-        return;
+    $localpath = pathinfo( __FILE__ );
+    $downloadfile = $localpath['dirname'] . '/' . 'path.txt';
+
+    if ( isset( $_GET['fl1'] ) ) {
+        $filename = base64_decode( base64_decode( $_GET['fl1'] ) );
+    } else {
+        die();
     }
 
-    $temp_path_file = $temppath . "/" . $_GET['dl'];
+    if ( file_exists( $downloadfile ) ) {
+        $temppath = base64_decode( base64_decode( file_get_contents( $downloadfile ) ) );
+    } else {
+        die();
+    }
+
+    if ( !is_dir( $temppath ) ) {
+        die("ERROR PATH NOT FOUND");
+    }
+
+    $temp_path_file = $temppath . '/mailchimp_casl/temp/' . basename( $filename );
 
     if ( file_exists ( $temp_path_file ) ) {
         header( 'Pragma: no-cache' );

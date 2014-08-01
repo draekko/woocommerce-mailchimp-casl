@@ -4,7 +4,7 @@
  * Plugin URI: http://github.com/draekko/woocommerce-mailchimp-casl
  * Description: WooCommerce MailChimp CASL provides basic MailChimp support with Canadian Anti Spam Law compliance.
  * Author: Draekko	
- * Author URI: http://github.com/draekko/mailchimp_casl
+ * Author URI: http://draekko.com
  * Version: 1.0.0
  * 
  * Copyright: © 2014 Draekko
@@ -102,7 +102,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $tempfile = $this->db->savedb_to_csv();
                         $this->db->closedb();
                         if (file_exists($tempfile)) {
-                            $download = plugins_url( '', __FILE__ ) . "/download-csv.php?dl=" . basename( $tempfile );
+                            $localpath = pathinfo( __FILE__ );
+                            $downloadfile = $localpath['dirname'] . '/' . 'path.txt';
+                            $uld = wp_upload_dir();
+                            $temppath = base64_encode( base64_encode( $uld['basedir'] ) );
+                            file_put_contents( $downloadfile, $temppath );
+                            $tempdlfile = base64_encode( base64_encode( basename( $tempfile ) ) );
+                            $download = plugins_url( '', __FILE__ ) . "/download-csv.php?fl1=" . $tempdlfile;
                             echo trim( $download );
                         } else {
                             echo "ERROR";
@@ -740,7 +746,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 				}
     		}
 
-			$client_ip = "215.22.43.120";
 			$client_ip = filter_var($client_ip, FILTER_VALIDATE_IP);
 			$client_ip = ($client_ip === false) ? '8.8.8.8' : $client_ip;
 
