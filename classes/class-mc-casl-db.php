@@ -116,6 +116,11 @@ class MailChimp_CASL_DB extends SQLite3 {
     	    $searchme .= 'username="' . $db_data['username'] . '"';
 	        $search = true;
     	}
+        if ( isset( $db_data['useragent'] ) ) {
+            if ($search == true) $searchme .= ' OR ';
+    	    $searchme .= 'useragent="' . $db_data['useragent'] . '"';
+	        $search = true;
+    	}
         if ( isset( $db_data['id'] ) ) {
             if ($search == true) $searchme .= ' OR ';
 	        $searchme .= 'userid=' . strval( $db_data['id'] );
@@ -144,7 +149,7 @@ class MailChimp_CASL_DB extends SQLite3 {
 		$create_table  = 'CREATE TABLE IF NOT EXISTS subscription(';
 		$create_table .= 'id INTEGER PRIMARY KEY AUTOINCREMENT, loggedin BOOLEAN, frontform BOOLEAN, checkoutform BOOLEAN, language TEXT, timestamp INTEGER, status BOOLEAN, ';
 		$create_table .= 'email TEXT, date TEXT, time TEXT, dob TEXT, fname TEXT, lname TEXT, ip TEXT, country TEXT, ';
-		$create_table .= 'useremail TEXT, userphone TEXT, userid INTEGER, usercompany TEXT, userfname TEXT, userlname TEXT, username TEXT);';
+		$create_table .= 'useremail TEXT, userphone TEXT, userid INTEGER, usercompany TEXT, userfname TEXT, userlname TEXT, username TEXT, useragent TEXT);';
 		return $this->execute( $create_table );
 	}
 
@@ -173,6 +178,7 @@ class MailChimp_CASL_DB extends SQLite3 {
 	    $sql .= "\"".$data_array['userfname'] . "\", ";
 	    $sql .= "\"".$data_array['userlname'] . "\", ";
 	    $sql .= "\"".$data_array['username'] . "\"";
+	    $sql .= "\"".$data_array['useragent'] . "\"";
 	    $sql .= ")";
 
 	    if ($this->execute($sql)) {
@@ -215,7 +221,7 @@ class MailChimp_CASL_DB extends SQLite3 {
 
 		$header = array( 'id', 'loggedin', 'frontform', 'checkoutform', 'language', 'timestamp', 'status',
 		                 'email', 'date', 'time', 'dob', 'fname', 'lname', 'ip', 'country',
-		                 'useremail', 'userphone', 'userid', 'usercompany', 'userfname', 'userlname', 'username');
+		                 'useremail', 'userphone', 'userid', 'usercompany', 'userfname', 'userlname', 'username', 'useragent');
 
         fputcsv($fp, $header);
         $rows = $this->querydb( "SELECT * FROM subscription;" );

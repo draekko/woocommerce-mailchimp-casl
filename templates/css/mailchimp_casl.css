@@ -7,12 +7,85 @@
  */
 
 @font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: url('https://themes.googleusercontent.com/font?kit=biUEjW7P-lfzIZFXrcy-wQ') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://themes.googleusercontent.com/font?kit=7KXg6nyyqN8gyMoNwQ7aOQ') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 500;
+  src: url('https://themes.googleusercontent.com/font?kit=daIfzbEw-lbjMyv4rMUUTj8E0i7KZn-EPnyo3HZu7kw') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 300;
+  src: url('https://themes.googleusercontent.com/font?kit=iE8HhaRzdhPxC93dOdA05z8E0i7KZn-EPnyo3HZu7kw') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 100;
+  src: url('https://themes.googleusercontent.com/font?kit=jB4HYzUnEmLtjz-UHQe60fesZW2xOQ-xsNqO47m55DA') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://themes.googleusercontent.com/font?kit=vxNK-E6B13CyehuDCmvQvw') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  src: url('https://themes.googleusercontent.com/font?kit=1_sFLBJZ_MiiGcnkjN_Mgg') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: url('https://themes.googleusercontent.com/font?kit=MMDEOSa6i6T9gBocjYCJkQ') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 700;
+  src: url('https://themes.googleusercontent.com/font?kit=owYYXKukxFDFjr0ZO8NXhz8E0i7KZn-EPnyo3HZu7kw') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 900;
+  src: url('https://themes.googleusercontent.com/font?kit=b9PWBSMHrT2zM5FgUdtu0T8E0i7KZn-EPnyo3HZu7kw') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://themes.googleusercontent.com/font?kit=d-QWLnp4didxos_6urzFtg') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://themes.googleusercontent.com/font?kit=grlryt2bdKIyfMSOhzd1eA') format('woff');
+}
+
+@font-face {
   font-family: 'FontAwesome';
   src: url('fonts/fontawesome-webfont.eot?v=4.1.0');
-  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
-  		 url('fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype');
+/*  		 url('fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
   		 url('fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
-  		 url('fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  		 url('fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg'); */
   font-weight: normal;
   font-style: normal;
 }
@@ -25,6 +98,10 @@
 label {
 	display: inline-block;
 	font-weight: bold;
+}
+
+p.mc_casl_disclaimer {
+    max-width: 800px;
 }
 
 .mc_casl_newsletter {
@@ -153,6 +230,17 @@ input[type=submit].mailchimp_casl_newsletter_submit {
 	border-bottom-right-radius: 3px;
 }
 
+input[type=button]#mc_casl_cancel_error_button.mailchimp_casl_newsletter_button {
+    margin: 0;
+    margin-right: auto;
+    margin-left: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 10px;
+    top: initial;
+}
+
 input[type=button].mailchimp_casl_checkout_button,
 input[type=button].mailchimp_casl_newsletter_button {
 	cursor: pointer;
@@ -192,11 +280,13 @@ input[type=button].mailchimp_casl_newsletter_button {
 input[type=submit]:hover.mailchimp_casl_newsletter_submit,
 input[type=button]:hover.mailchimp_casl_newsletter_button {
 	color: #cfbd25 !important;
+	background-color: #222;
 }
 
 input[type=button]:hover.mailchimp_casl_checkout_submit,
 input[type=button]:hover.mailchimp_casl_checkout_button {
 	color: #cfbd25 !important;
+	background-color: #222;
 }
 
 .mc_casl_newsletter form input[type="text"] {
@@ -515,6 +605,26 @@ form .form-row-casl select {
     margin: 55px 160px 5px 0;
 } */
 
+input[type=submit].mailchimp_casl_newsletter_submit.agreement_fix:active,
+input[type=button].mailchimp_casl_newsletter_button.agreement_fix:active,
+input[type=submit].mailchimp_casl_newsletter_submit.agreement_fix:hover,
+input[type=button].mailchimp_casl_newsletter_button.agreement_fix:hover,
+input[type=submit].mailchimp_casl_newsletter_submit.agreement_fix:focus,
+input[type=button].mailchimp_casl_newsletter_button.agreement_fix:focus,
+input[type=button].mailchimp_casl_checkout_button:focus,
+input[type=submit].mailchimp_casl_newsletter_button:focus,
+input[type=button].mailchimp_casl_newsletter_button:focus,
+input[type=button].mailchimp_casl_checkout_button:hover,
+input[type=submit].mailchimp_casl_newsletter_button:hover,
+input[type=button].mailchimp_casl_newsletter_button:hover,
+input[type=button].mailchimp_casl_checkout_submit.agreement_fix:focus,
+input[type=button].mailchimp_casl_checkout_button.agreement_fix:focus,
+input[type=button].mailchimp_casl_checkout_submit.agreement_fix:hover,
+input[type=button].mailchimp_casl_checkout_button.agreement_fix:hover {
+    background-color: #222;
+}
+
+
 @media only screen and (min-width: 1200px) and (max-width: 8000px) {
 	.mc_casl_container {
 		padding: 0 13px;
@@ -715,8 +825,8 @@ form .form-row-casl select {
 	input[type=button]#mc_casl_cancel_button.mailchimp_casl_newsletter_button.agreement_fix {
 		width: 28%;
 		font-size: 16px;
-		margin-top: 55px;
 		margin-left: auto;
+		margin-top: 55px;
 		margin-right: 150px;
 		margin-bottom: 10px;
 	}

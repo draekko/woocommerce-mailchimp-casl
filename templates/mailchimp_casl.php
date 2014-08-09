@@ -13,11 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $current_user, $woocommerce, $verify_newsletter_login, $use_newsletter_template, $mc_casl_integration, $mc_casl_integration_path, $mc_casl_integration_url_path;
 
-wp_register_script('mailchimp-casl_js',  $mc_casl_integration_url_path . '/scripts/mailchimp_casl.js');
-wp_enqueue_script('mailchimp-casl_js');
-
-wp_register_style('mailchimp-casl_css',  $mc_casl_integration_url_path . '/css/mailchimp_casl.css');
-wp_enqueue_style('mailchimp-casl_css');
+//wp_deregister_script('mailchimp-casl_js');
+//wp_dequeue_script('mailchimp-casl_js');
+//wp_register_script('mailchimp-casl_js',  $mc_casl_integration_url_path . '/scripts/mailchimp_casl.js');
+//wp_enqueue_script('mailchimp-casl_js');
+//wp_deregister_style('mailchimp-casl_css');
+//wp_register_style('mailchimp-casl_css',  $mc_casl_integration_url_path . '/css/mailchimp_casl.css');
+//wp_enqueue_style('mailchimp-casl_css');
 
 $months = array(
 	'1' 	=> 'January',
@@ -60,7 +62,8 @@ if (is_user_logged_in()) {
 	<div class="mc_casl_newsletter">
         <div class="mc_casl_container">
             <h4 class="mc_casl_section_title"><?php echo $mc_casl_integration->get_option('mc_casl_newsletter_title_label'); ?></h4>
-            <form action="javascript:cs_mailchimp_submit('<?php echo get_template_directory_uri()?>','<?php echo $counter; ?>')" id="mcform" method="post">
+            <!-- <form action="javascript:mailchimp_casl_submit('<?php echo get_template_directory_uri()?>' ?>')" id="mcform" method="post"> -->
+            <form action="" id="mcform" method="post"> 
 					<div id="newsletter_mess_<?php echo $counter;?>" style="display:none"></div>
 					<div>
 						<div style="width:100%;display:inline-block;">
@@ -109,7 +112,7 @@ if (is_user_logged_in()) {
 							<?php } ?>
 
 							<div style="display:block">
-								<input id="mc_casl_email" type="text" name="mc_casl_email" class="mailchimp_casl_newsletter_fix" value="" placeholder="<?php echo $mc_casl_integration->get_option('mc_casl_newsletter_email_label'); ?>" />
+								<input id="mc_casl_email" type="text" name="mc_casl_email" autocomplete="off" class="mailchimp_casl_newsletter_fix" value="" placeholder="<?php echo $mc_casl_integration->get_option('mc_casl_newsletter_email_label'); ?>" />
 								<input type="button" name="button" id="mc_casl_submit_button" class="mailchimp_casl_newsletter_button with_name_fix" value="submit" />
 							</div>
 						</div>

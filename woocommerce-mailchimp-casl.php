@@ -12,17 +12,51 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
+/**
+    ==== Theme Integration ====
+    Add one of these sections of lines to your theme to make
+    'template integration' work:
+
+    if ( function_exists( 'mailchimp_casl_template' ) ) {
+        mailchimp_casl_template();
+    }
+
+    or
+
+    <?php if ( function_exists( 'mailchimp_casl_template' ) ) {
+        mailchimp_casl_template();
+    } ?>
+
+    Note: Usually located at the bottom in the footer (added to
+          footer.php in theme).
+
+ **/
+
 /* Exit if accessed directly */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined( 'MC_CASL_TRUE' ) ) {
-    define('MC_CASL_TRUE', 1, true );
+    define( 'MC_CASL_TRUE', 1, true );
 }
 if ( ! defined( 'MC_CASL_FALSE' ) ) {
-    define('MC_CASL_FALSE', 0, true );
+    define( 'MC_CASL_FALSE', 0, true );
 }
 
 global $verify_newsletter_login, $use_newsletter_template, $mc_casl_integration, $mc_casl_integration_path, $mc_casl_integration_url_path;
+
+register_activation_hook( __FILE__, 'outer_wmc_install' );
+register_deactivation_hook( __FILE__, 'outer_wmc_uninstall' );
+
+function outer_wmc_install() {
+    if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+        deactivate_plugins(basename(__FILE__));
+        $deathscene = '<p><strong>WooCommerce MailChimp CASL plugin</strong> needs the plugin <a target="_blank" href="http://www.woothemes.com/woocommerce/">WooCommerce</a> to be installed first.</p>';
+        die($deathscene);
+    }
+}
+
+function outer_wmc_uninstall() {
+}
 
 /* Verify that Woocommerce is active */
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
@@ -36,11 +70,31 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 			public $mc_casl_plugin = true;
 			private $db;
 
+			const VERSION = '1.0.0';
+
             /***************************************************************/
 
 			public function __construct() {
-				add_action('plugins_loaded', array(&$this, 'init'), 0);
+                register_activation_hook( __FILE__, __CLASS__ . '::inner_wmc_install' );
+                register_deactivation_hook( __FILE__, __CLASS__ . '::inner_wmc_uninstall' );
+
+                add_action('plugins_loaded', array(&$this, 'init'), 0);
 			}
+
+            /***************************************************************/
+
+            public static function inner_wmc_install() {
+	    	    if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+                    deactivate_plugins(basename(__FILE__));
+                    $deathscene = '<p><strong>WooCommerce MailChimp CASL plugin</strong> needs the plugin <a target="_blank" href="http://www.woothemes.com/woocommerce/">WooCommerce</a> to be installed first.</p>';
+                    die($deathscene);
+			    }
+            }
+
+            /***************************************************************/
+
+            public static function inner_wmc_uninstall() {
+            }
 
             /***************************************************************/
 
@@ -75,6 +129,23 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 					}
 			    }
 
+                if ( !isset ( $mc_casl_integration ) ) {
+                    $mc_casl_integration = new WC_Integration_MC_CASL();
+                }
+
+                if ( ( $mc_casl_integration->get_option( 'mc_casl_enabled' ) == 'yes' ) ) {
+                    add_action( 'wp_enqueue_scripts', array( &$this, 'mailchimp_casl_styles_scripts' ) );
+                }
+
+
+                if ( ( $mc_casl_integration->get_option( 'mc_casl_enabled' ) == 'yes' ) &&
+                    ( $mc_casl_integration->get_option( 'mc_casl_display_opt_in' ) == 'yes' ) &&
+                    ( $mc_casl_integration->get_option( 'mc_casl_template_enabled' ) != 'yes' ) )
+                {
+                    add_action( 'wp_footer', 'mailchimp_casl_template' );
+                }
+
+                add_action( 'wp_head', array( $this, 'mailchimp_frontend_ajaxurl' ) );
 				add_filter( 'woocommerce_integrations', array(&$this, 'add_options') );
 				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array(&$this, 'add_action_link') );
 				add_action( 'init', array($this, 'load_plugin_textdomain' ) );
@@ -87,6 +158,21 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 				$this->create_sqlite_database();
 			}
+
+            /***************************************************************/
+
+			public function mailchimp_casl_styles_scripts() {
+                wp_enqueue_script('mailchimp-casl_js',  plugins_url( 'templates/', __FILE__ ) . 'scripts/mailchimp_casl.js', array ( 'jquery' ), self::VERSION );
+                wp_enqueue_style('mailchimp-casl_css',  plugins_url( 'templates/', __FILE__ ) . 'css/mailchimp_casl.css', false, self::VERSION );
+			}
+
+            /***************************************************************/
+
+            public function mailchimp_frontend_ajaxurl() {
+                echo '<script type="text/javascript">';
+                echo "var mc_casl_ajaxurl='" . admin_url('admin-ajax.php', 'relative') ."';";
+                echo '</script>';
+            }
 
             /***************************************************************/
 
@@ -126,6 +212,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 if ( !isset ( $mc_casl_integration ) ) {
                     $mc_casl_integration = new WC_Integration_MC_CASL();
                 }
+
+                syslog(LOG_ERR, 'start');
+                syslog(LOG_ERR, printf($_POST));
+                syslog(LOG_ERR, $_POST['mc_casl_email']);
+                syslog(LOG_ERR, $_POST['mc_casl_dob']);
+                syslog(LOG_ERR, $_POST['mc_casl_bday']);
+                syslog(LOG_ERR, $_POST['mc_casl_fname']);
+                syslog(LOG_ERR, $_POST['mc_casl_lname']);
+                syslog(LOG_ERR, 'end');
 
                 $mailchimp_api_key = $mc_casl_integration->get_option( 'mc_casl_api_key' );
                 $mailchimp_list_id = $mc_casl_integration->get_option( 'mc_casl_list' );
@@ -232,6 +327,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                     $result = $MailChimp->call('lists/subscribe', $mailchimp_subscribe);
 
+                    $useragent = $_SERVER['HTTP_USER_AGENT'];
+
                     $useremail = '';
                     $userphone = '';
                     $usercompany = '';
@@ -275,6 +372,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'userfname'     => $userfname,
                         'userlname'     => $userlname,
                         'username'      => $username,
+                        'useragent'     => $useragent,
                         'userid'        => $userid,
                     );
   	
@@ -574,9 +672,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 	}
 
     /***************************************************************/
+    /***************************************************************/
+	/*                                                             */
+	/*                        instantiate                          */
+	/*                                                             */
+    /***************************************************************/
+    /***************************************************************/
 
-	/* instantiate */
-	$mc_casl_woo_plugin = new WoocommerceMailChimpCasl();
+
+    $mc_casl_woo_plugin = new WoocommerceMailChimpCasl();
+
+
+    /***************************************************************/
 
 	/* FILTER IP for LOOPBACK */
 	if ( ! function_exists( 'is_mc_casl_plugin' ) ) {
@@ -585,6 +692,19 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 (((ip2long($value) & 0xff000000) == 0x7f000000) ? FALSE : $value);
        }
     }
+
+    /***************************************************************/
+
+	if ( ! function_exists( 'wc_mailchimp_casl_activate' ) ) {
+		function wc_mailchimp_casl_activate() {
+			deactivate_plugins(basename(__FILE__));
+			wp_die('<p><strong>WooCommerce MailChimp plug</strong> needs the plugin <a href="http://www.woothemes.com/woocommerce/">WooCommerce</a> to be installed first.</p>');
+		    if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+			deactivate_plugins(basename(__FILE__));
+			wp_die('<p><strong>WooCommerce MailChimp plug</strong> needs the plugin <a href="http://www.woothemes.com/woocommerce/">WooCommerce</a> to be installed first.</p>');
+		    }
+		}
+	}
 
     /***************************************************************/
 
@@ -723,21 +843,23 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 			$client_ip = '8.8.8.8';
 
 			if (isset($_SERVER)) {
-        		if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-            	$client_ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        		if (isset($_SERVER["REMOTE_ADDR"])) {
+        			$client_ip = $_SERVER["REMOTE_ADDR"];
+        		} else if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+                    $client_ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
         		} else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
-            	$client_ip = $_SERVER["HTTP_CLIENT_IP"];
+                    $client_ip = $_SERVER["HTTP_CLIENT_IP"];
         		} else {
         			$client_ip = $_SERVER["REMOTE_ADDR"];
         		}
     		} else if (getenv('HTTP_X_FORWARDED_FOR')) {
-        		$client_ip = getenv('HTTP_X_FORWARDED_FOR');
+                    $client_ip = getenv('HTTP_X_FORWARDED_FOR');
         		if (strstr($client_ip, ', ')) {
     				$ips = explode(', ', $client_ip);
     				$client_ip = $ips[0];
 				}
 			} else if (getenv('HTTP_CLIENT_IP')) {
-      		$client_ip = getenv('HTTP_CLIENT_IP');
+                $client_ip = getenv('HTTP_CLIENT_IP');
     		} else {
     			$client_ip = getenv('REMOTE_ADDR');
         		if (strstr($client_ip, ', ')) {
@@ -746,8 +868,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 				}
     		}
 
-			$client_ip = filter_var($client_ip, FILTER_VALIDATE_IP);
-			$client_ip = ($client_ip === false) ? '8.8.8.8' : $client_ip;
+            $filter_flags = FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_IPV4;
+			if (!filter_var($client_ip, FILTER_VALIDATE_IP, $filter_flags)) {
+                $client_ip = '0.0.0.0' ;
+			} 
 
 			$long = ip2long($client_ip);
 			if ( $long == -1 || $long === FALSE ) {
@@ -864,6 +988,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 							$mc_casl_integration_path = plugin_dir_path( __FILE__ ) . 'templates/';
 							$newsletter = $mc_casl_integration_path . 'mailchimp_casl.php';
 						}
+
 						include_once( $newsletter );
 					}
 				}

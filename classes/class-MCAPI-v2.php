@@ -1,15 +1,15 @@
 <?php
 /**
  * Super-simple, minimum abstraction MailChimp API v2 wrapper
- * 
+ *
  * Uses curl if available, falls back to file_get_contents and HTTP stream.
  * This probably has more comments than code.
  *
  * Contributors:
  * Michael Minor <me@pixelbacon.com>
  * Lorna Jane Mitchell, github.com/lornajane
- * 
- * @author Drew McLellan <drew.mclellan@gmail.com> 
+ *
+ * @author Drew McLellan <drew.mclellan@gmail.com>
  * @version 1.1.1
  */
 class MailChimp
@@ -24,6 +24,7 @@ class MailChimp
      */
     function __construct($api_key)
     {
+        if (!isset($api_key) || empty($api_key)) return;
         $this->api_key = $api_key;
         list(, $datacentre) = explode('-', $this->api_key);
         $this->api_endpoint = str_replace('<dc>', $datacentre, $this->api_endpoint);
@@ -47,7 +48,7 @@ class MailChimp
      * @return array          Assoc array of decoded result
      */
     private function makeRequest($method, $args=array(), $timeout = 10)
-    {      
+    {
         $args['apikey'] = $this->api_key;
 
         $url = $this->api_endpoint.'/'.$method.'.json';
@@ -56,7 +57,7 @@ class MailChimp
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
+            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
             curl_setopt($ch, CURLOPT_POST, true);

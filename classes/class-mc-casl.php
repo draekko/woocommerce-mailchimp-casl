@@ -25,6 +25,8 @@ if ( ! defined( 'MC_CASL_FALSE' ) ) {
 
 class WC_Integration_MC_CASL extends WC_Integration {
 
+    const VERSION = '1.0.0';
+
 	/******************************************************************************************************************/
 
 	public function __construct() {
@@ -37,8 +39,20 @@ class WC_Integration_MC_CASL extends WC_Integration {
 		}
 
 		$this->id					= 'mailchimp_casl';
+
+		$this->disclaimer           = "<strong>Disclaimer!</strong> This application and documentation and the information in it ";
+        $this->disclaimer          .= "does not constitute legal advice. It is also is not a substitute for legal ";
+		$this->disclaimer          .= "or other professional advice. Users should consult their own legal counsel ";
+        $this->disclaimer          .= "for advice regarding the application of the law and this application as it ";
+        $this->disclaimer          .= "applies to you and/or your business. This program is distributed in the hope ";
+        $this->disclaimer          .= "that it will be useful, but <strong>WITHOUT ANY WARRANTY; without even the implied ";
+        $this->disclaimer          .= "warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE</strong>. Continued ";
+        $this->disclaimer          .= "use consitutes agreement of these terms. See the GNU General Public License ";
+        $this->disclaimer          .= "for more details. <a target='_blank' href='https://www.gnu.org/licenses/gpl-3.0.html'>https://www.gnu.org/licenses/gpl-3.0.html</a>";
+        
 		$this->method_title     	= __( 'MailChimp CASL', 'wc_mailchimp_casl' );
 		$this->method_description	= __( 'MailChimp is a popular email marketing service.', 'wc_mailchimp_casl' );
+
 		$this->init_settings();
 		$this->api_key 				= $this->get_option( 'mc_casl_api_key' );
 		$this->attrib_groups_key	= '';
@@ -88,9 +102,31 @@ class WC_Integration_MC_CASL extends WC_Integration {
 		/* Maybe save the "opt-in" field on the checkout */
 		add_action( 'woocommerce_checkout_update_order_meta', array( &$this, 'mc_casl_save_checkout_fields' ) );
 
+        //add_action( 'admin_enqueue_scripts', array( $this, 'do_style_action' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'do_script_action' ) );
+	}
+
+	/******************************************************************************************************************/
+
+    /* HACK TO GET CSS ON ADMIN PAGE */
+	public function do_css_admin_init() {
+	    $style_id = 'wc_style_mc_casl_options-css';
+		$style_path = str_replace( 'classes/', '', plugins_url( 'css/mc_casl_profile.css', __FILE__ ) );
+	    echo "<link rel='stylesheet' id='".$style_id."'  href='".$style_path."?ver=".self::VERSION."' type='text/css' media='all' />";
+	}
+
+	public function do_style_action() {
+	    $style_id = 'wc_style_mc_casl_options-css';
+		$style_path = str_replace( 'classes/', '', plugins_url( 'css/mc_casl_profile.css', __FILE__ ) );
+        wp_enqueue_style( $style_id, $style_path, array( 'jquery' ), self::VERSION );
+	}
+    
+	/******************************************************************************************************************/
+
+	public function do_script_action() {
 		$script_path = str_replace( 'classes/', '', plugins_url( 'scripts/mailchimp_casl_wc.js', __FILE__ ) );
-		wp_register_script('wc_script_mc_casl_download-csv', $script_path);
-		wp_enqueue_script('wc_script_mc_casl_download-csv');
+		wp_enqueue_script('wc_script_mc_casl_download-csv', $script_path, array( 'jquery' ), self::VERSION );
+		$this->do_css_admin_init();
 	}
 
 	/******************************************************************************************************************/
@@ -173,7 +209,7 @@ class WC_Integration_MC_CASL extends WC_Integration {
 				'mc_casl_ip_database' 		=> array(
 								'title' 			=> __( 'IP to Country Database', 'wc_mailchimp_casl' ),
 								'type' 			=> 'select',
-								'description' 	=> __( 'Select which database to use to find what country an ip belongs to. This plugin includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com">http://www.maxmind.com</a> as well as data from <a href="http://www.ip2nation.com">http://www.ip2nation.com</a>. The web services data is provided byte <a href="http://www.ipinfo.io">http://www.ipinfo.io</a> which has a max call rate of 1000 lookups a day for free, and from <a href="http://www.geoplugin.com/">http://www.geoplugin.com/</a>. Find information on creating the sqlite database files from the original source at <a href="https://github.com/draekko/databases">https://github.com/draekko/databases</a>.', 'wc_mailchimp_casl' ),
+								'description' 	=> __( 'Select which database to use to find what country an ip belongs to. This plugin includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com">MaxMind</a> as well as data from <a href="http://www.ip2nation.com">Ip2Nation</a>. The web services data is provided byte <a href="http://www.ipinfo.io">IpInfo</a> which has a max call rate of 1000 lookups a day for free, and from <a href="http://www.geoplugin.com/">GeoPlugin</a>. Find information on creating the sqlite database files from the original source at <a href="https://github.com/draekko/databases">https://github.com/draekko/databases</a>.', 'wc_mailchimp_casl' ),
 								'default' 		=> 'geolite2',
 								'options' 		=> array(
 								'geolite2' 	=> __( 'MaxMind GeoLite2 [sqlite]', 'wc_mailchimp_casl' ),
@@ -476,6 +512,8 @@ class WC_Integration_MC_CASL extends WC_Integration {
         $language = $merge_vars['mc_language'] = 'en';
         $merge_vars['optin_time'] = $current_date . ' ' . $current_time;
 
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+
         $useremail = '';
         $userphone = '';
         $usercompany = '';
@@ -524,6 +562,7 @@ class WC_Integration_MC_CASL extends WC_Integration {
             'userfname'     => $userfname,
             'userlname'     => $userlname,
             'username'      => $username,
+            'useragent'     => $useragent,
             'userid'        => $userid,
         );
 
@@ -547,7 +586,7 @@ class WC_Integration_MC_CASL extends WC_Integration {
 			$retval          	= $mailchimp_casl->call('lists/list');
 
 			if ( !isset( $retval ) || !is_array( $retval ) ) {
-				echo '<div class="error"><p>Unable to load lists() from MailChimp CASL: (-999) Unknown error', 'wc_mailchimp_casl</p></div>';
+				echo '<div class="error"><p>Unable to load lists() from MailChimp CASL: (-999) Unknown error wc_mailchimp_casl</p></div>';
 				return false;
 			} else if ( isset( $retval['status'] ) && $retval['status'] == 'error' ) {
 				echo '<div class="error"><p>' . sprintf( __( 'Unable to load lists() from MailChimp CASL: (%s) %s', 'wc_mailchimp_casl' ), $retval['code'], $retval['error'] ) . '</p></div>';
@@ -578,13 +617,15 @@ class WC_Integration_MC_CASL extends WC_Integration {
 
 	/******************************************************************************************************************/
 
-	function admin_options() {
-    	?>
-		<h3><?php _e( 'MailChimp CASL', 'wc_mailchimp_casl' ); ?></h3>
-    	<p><?php _e( 'Enter your MailChimp CASL settings below to control how your Theme and WooCommerce integrates with your MailChimp lists.', 'wc_mailchimp_casl' ); ?></p>
-    		<table class="form-table">
-	    		<?php $this->mc_casl_generate_settings_html(); ?>
-			</table>
+	function admin_options() { ?>
+            <div class='mc_casl_admin_options'>
+            <h3><?php _e( 'MailChimp CASL', 'wc_mailchimp_casl' ); ?></h3>
+            <p><?php _e( 'Enter your MailChimp CASL settings below to control how your theme and WooCommerce integration with your MailChimp lists.', 'wc_mailchimp_casl' ); ?></p>
+            <?php echo "<p class='mc_casl_disclaimer'>".$this->disclaimer."</p>"; ?>
+            <table class="form-table">
+                <?php $this->mc_casl_generate_settings_html(); ?>
+            </table>
+        </div>
 		<?php
 	}
 
@@ -594,9 +635,9 @@ class WC_Integration_MC_CASL extends WC_Integration {
 
 	public function mc_casl_generate_settings_html( $form_fields = false ) {
 		$html = '';
-   	if ( ! $form_fields ) {
+        if ( ! $form_fields ) {
 			$form_fields = $this->get_form_fields();
-   	}
+        }
 		foreach ( $form_fields as $k => $v ) {
 			if ( ! isset( $v['type'] ) || ( $v['type'] == '' ) ) {
 				$v['type'] = 'text'; 
