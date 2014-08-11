@@ -118,7 +118,7 @@ class WC_Integration_MC_CASL extends WC_Integration {
 	public function do_style_action() {
 	    $style_id = 'wc_style_mc_casl_options-css';
 		$style_path = str_replace( 'classes/', '', plugins_url( 'css/mc_casl_profile.css', __FILE__ ) );
-        wp_enqueue_style( $style_id, $style_path, array( 'jquery' ), self::VERSION );
+        wp_enqueue_style( $style_id, $style_path, false, self::VERSION );
 	}
     
 	/******************************************************************************************************************/
@@ -459,7 +459,7 @@ class WC_Integration_MC_CASL extends WC_Integration {
 			return false; 
 		}
 
-		$MailChimp = new MailChimp( $this->api_key );
+		$MailChimp = new MailChimpApi( $this->api_key );
 
 		if ( $listid == 'false' ) {
 			$listid = $this->list;
@@ -582,7 +582,7 @@ class WC_Integration_MC_CASL extends WC_Integration {
 	public function get_lists() {
 		if ( ! $mailchimp_lists = get_transient( 'wc_mailchimp_casl_list_' . md5( $this->api_key ) ) ) {
 			$mailchimp_lists 	= array();
-			$mailchimp_casl	= new MailChimp( $this->api_key );
+			$mailchimp_casl	= new MailChimpApi( $this->api_key );
 			$retval          	= $mailchimp_casl->call('lists/list');
 
 			if ( !isset( $retval ) || !is_array( $retval ) ) {

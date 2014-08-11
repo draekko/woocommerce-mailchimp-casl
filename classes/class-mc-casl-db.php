@@ -177,7 +177,7 @@ class MailChimp_CASL_DB extends SQLite3 {
 	    $sql .= "\"".$data_array['usercompany'] . "\", ";
 	    $sql .= "\"".$data_array['userfname'] . "\", ";
 	    $sql .= "\"".$data_array['userlname'] . "\", ";
-	    $sql .= "\"".$data_array['username'] . "\"";
+	    $sql .= "\"".$data_array['username'] . "\", ";
 	    $sql .= "\"".$data_array['useragent'] . "\"";
 	    $sql .= ")";
 

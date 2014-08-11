@@ -4,7 +4,7 @@ Tags: woocommerce mailchimp casl wordpress
 Donate link: http://draekko.com
 Requires at least: 3.9.1
 Tested up to: 3.9.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL v3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -101,6 +101,14 @@ Note: Usually located at the bottom in the footer (added to footer.php
       in theme).
 
 == Changelog ==
+
+= 1.0.2 =
+* Fixed the bug preventing from templates in theme from showing up.
+
+= 1.0.1 =
+* Fixed bug in database code.
+* Renamed MailChimp class to avoid conflicts .
+* Removed unused function .
 
 = 1.0.0 =
 * This is the first public release.

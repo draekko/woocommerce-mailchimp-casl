@@ -121,6 +121,7 @@ p.mc_casl_disclaimer {
 .mc_casl_newsletter form {
 	position: relative;
 	width: 520px;
+    max-width: 600px;
 	display: inline-block;
 }
 
@@ -157,6 +158,10 @@ p.mc_casl_disclaimer {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+form#mcform {
+    max-width: 600px;
 }
 
 form#mcform label {

@@ -5,7 +5,7 @@
  * Description: WooCommerce MailChimp CASL provides basic MailChimp support with Canadian Anti Spam Law compliance.
  * Author: Draekko	
  * Author URI: http://draekko.com
- * Version: 1.0.0
+ * Version: 1.0.2
  * 
  * Copyright: © 2014 Draekko
  * License: GNU General Public License v3.0
@@ -96,11 +96,25 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             public static function inner_wmc_uninstall() {
             }
 
+
+            /***************************************************************/
+
+            public static function get_template_path() {
+                $mc_casl_integration_url_path = '';
+                if ( locate_template( 'mailchimp_casl.php' ) != '' ) {
+                    $mc_casl_integration_url_path = get_template_directory_uri() . "/";
+                } else {
+                    $mc_casl_integration_url_path = plugins_url( 'templates/', __FILE__ );
+                }
+                return $mc_casl_integration_url_path;
+            }
+
+
             /***************************************************************/
 
 			public function init() {
-				include_once( 'classes/class-mc-casl.php' );
 				include_once( 'classes/class-mc-casl-db.php' );
+				include_once( 'classes/class-mc-casl.php' );
 
 				if ( ! class_exists( 'SQLite3' ) ) {
 					$this->status = 1;
@@ -162,8 +176,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             /***************************************************************/
 
 			public function mailchimp_casl_styles_scripts() {
-                wp_enqueue_script('mailchimp-casl_js',  plugins_url( 'templates/', __FILE__ ) . 'scripts/mailchimp_casl.js', array ( 'jquery' ), self::VERSION );
-                wp_enqueue_style('mailchimp-casl_css',  plugins_url( 'templates/', __FILE__ ) . 'css/mailchimp_casl.css', false, self::VERSION );
+			    $template_path = self::get_template_path();
+                wp_enqueue_script('mailchimp-casl_js',  $template_path . 'scripts/mailchimp_casl.js', array ( 'jquery' ), self::VERSION );
+                wp_enqueue_style('mailchimp-casl_css',  $template_path . 'css/mailchimp_casl.css', false, self::VERSION );
 			}
 
             /***************************************************************/
@@ -695,19 +710,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
     /***************************************************************/
 
-	if ( ! function_exists( 'wc_mailchimp_casl_activate' ) ) {
-		function wc_mailchimp_casl_activate() {
-			deactivate_plugins(basename(__FILE__));
-			wp_die('<p><strong>WooCommerce MailChimp plug</strong> needs the plugin <a href="http://www.woothemes.com/woocommerce/">WooCommerce</a> to be installed first.</p>');
-		    if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-			deactivate_plugins(basename(__FILE__));
-			wp_die('<p><strong>WooCommerce MailChimp plug</strong> needs the plugin <a href="http://www.woothemes.com/woocommerce/">WooCommerce</a> to be installed first.</p>');
-		    }
-		}
-	}
-
-    /***************************************************************/
-
 	if ( ! function_exists( 'is_mc_casl_plugin' ) ) {
 		function is_mc_casl_plugin() {
 			global $mc_casl_woo_plugin;
@@ -977,7 +979,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 						echo "var checkage=".$checkage.";";
 						echo "</script>\n";
 						$mc_casl_integration_url_path = '';
-						if ( '' != locate_template( 'newsletter.php' ) ) {
+						if ( locate_template( 'mailchimp_casl.php' ) != '' ) {
 							global $mc_casl_integration_url_path, $mc_casl_integration_path;
 							$mc_casl_integration_url_path = get_template_directory_uri();
 							$mc_casl_integration_path = get_template_directory();
